@@ -1,0 +1,51 @@
+<div class="elevator-container">
+  <div class="control-panel">
+    <button class="start" (click)="startSimulation()">Start Simulation</button>
+    <button class="stop" (click)="stopSimulation()">Stop Simulation</button>
+  </div>
+
+  <div class="ride-request">
+    <input type="number" #pickup placeholder="Pickup Floor" min="1" max="10">
+    <input type="number" #destination placeholder="Destination Floor" min="1" max="10">
+    <button class="request" (click)="requestRide(pickup.valueAsNumber, destination.valueAsNumber)">
+      Request Ride
+    </button>
+  </div>
+
+  <div *ngIf="rideMessage" [ngClass]="rideMessageType" class="ride-message">
+    {{ rideMessage }}
+  </div>
+
+  <table class="elevator-table">
+    <thead>
+      <tr>
+        <th>Car</th>
+        <th>Current Floor</th>
+        <th>Direction</th>
+        <th>Stops</th>
+        <th>Move (s)</th>
+        <th>Wait (s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of elevators" [ngClass]="{
+            'moving-up': e.direction === 1,
+            'moving-down': e.direction === -1,
+            'idle': e.direction === 0
+          }">
+        <td>{{ e.id }}</td>
+        <td>{{ e.currentFloor }}</td>
+        <td class="direction">
+          <span *ngIf="e.direction === 1">⬆</span>
+          <span *ngIf="e.direction === -1">⬇</span>
+          <span *ngIf="e.direction === 0">–</span>
+        </td>
+        <td>
+          <span *ngFor="let s of e.stops" class="stop-badge">{{ s }}</span>
+        </td>
+        <td>{{ e.moveSecondsRemaining }}</td>
+        <td>{{ e.waitSecondsRemaining }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
