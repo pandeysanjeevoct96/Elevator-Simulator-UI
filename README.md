@@ -1,3 +1,6 @@
+<img width="1036" height="733" alt="image" src="https://github.com/user-attachments/assets/be3caf9f-edec-4e95-aa4f-a253a3b5c9ce" />
+
+
 # ElevatorDemo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.1.
